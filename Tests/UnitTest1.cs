@@ -1,63 +1,74 @@
 using net_calculator_tester;
+using Newtonsoft.Json;
+using NUnit.Framework.Constraints;
 
 namespace Tests
 {
-
 
     [TestFixture]
     public class Tests
     {
 
-        private float num1;
-        private float num2;
-        private float risultato;
-
         [SetUp]
         public void Setup()
         {
-            num1 = 7.5f;
-            num2 = 3.5f;
-           
+
         }
 
-        [Test(Description = "Addizione tra i due numeri costanti espressi sopra")]
-        public void TestAddizione()
+        [Test(Description = "Addizione tra due numeri")]
+        [TestCase(2.2f, 1.1f, (2.2f + 1.1f))]
+        [TestCase(2.0f, -1.1f, 0.9f)]
+        [TestCase(0, 0, 0)]
+        [TestCase(float.MaxValue, 100, float.MaxValue + 100)]
+        public void TestAddizione(float num1, float num2, float risultato)
         {
-            
-            float operazione = Calculator.Addizione(num1, num2);
-            float risultato = 11;
-
-            Assert.That(operazione, Is.EqualTo(risultato));
+            Assert.That(Calculator.Addizione(num1, num2), Is.EqualTo(risultato));
         }
 
-        [Test(Description = "Sottrazione tra i due numeri costanti espressi sopra")]
-        public void TestSottrazione()
+        //---------------------------------------\\
+
+        [Test(Description = "Sottrazione tra 2 numeri")]
+        [TestCase(2.2f, 1.1f, (2.2f - 1.1f))]
+        [TestCase(2.0f, -1.1f, (2.0f - (-1.1f)))]
+        [TestCase(0, 0, 0)]
+        public void TestSottrazione(float num1, float num2, float risultato)
         {
 
-            float operazione = Calculator.Sottrazione(num1, num2);
-            float risultato = 4;
-
-            Assert.That(operazione, Is.EqualTo(risultato));
-        }
-        
-        [Test(Description = "Divisione (arrotondata) tra i due numeri costanti espressi sopra")]
-        public void TestDivisione()
-        {
-
-            float operazione = Calculator.Divisione(num1, num2);
-            float risultato = 2.14f;
-
-            Assert.That(operazione, Is.EqualTo(risultato));
+            Assert.That(Calculator.Sottrazione(num1, num2), Is.EqualTo(risultato));
         }
 
-        [Test(Description = "Moltiplicazione tra i due numeri costanti espressi sopra")]
-        public void TestMoltiplicazione()
+        //---------------------------------------\\
+
+        [Test(Description = "Divisione tra un float e lo zero")]
+        [TestCase(5)]
+        public void TestDivisioneConZero(float num1)
+        {
+            Assert.Throws<ArgumentException>(() => Calculator.Divisione(num1, 0));
+        }
+
+        //---------------------------------------\\
+
+        [Test(Description = "Divisione tra due numeri")]
+        [TestCase(2.2f, 1.1f, (2.2f / 1.1f))]
+        [TestCase(2.0f, -1.1f, (2.0f / -1.1f))]
+
+        public void TestDivisione(float num1, float num2, float risultato)
+        {
+            Assert.That(Calculator.Divisione(num1, num2), Is.EqualTo(risultato));
+        }
+
+
+        //---------------------------------------\\
+
+        [Test(Description = "Moltiplicazione tra due numeri")]
+        [TestCase(2.2f, 1.1f, (2.2f * 1.1f))]
+        [TestCase(2.0f, -1.1f, (2.0f * -1.1f))]
+        [TestCase(5, 0, 0)]
+        public void TestMoltiplicazione(float num1, float num2, float risultato)
         {
 
-            float operazione = Calculator.Moltiplicazione(num1, num2);
-            float risultato = 26.25f;
-
-            Assert.That(operazione, Is.EqualTo(risultato));
-        } 
+            Assert.That(Calculator.Moltiplicazione(num1, num2), Is.EqualTo(risultato));
+        }
     }
+
 }

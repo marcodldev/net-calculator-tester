@@ -24,8 +24,14 @@ namespace net_calculator_tester
 
         public static float Divisione(float num1, float num2)
         {
+            
+            if(num2 == 0)
+            {
+                //adattare il test case generando qui una eccezione
+                throw new ArgumentException();
+            }
+
             float risultato = num1 / num2;
-            risultato = (float)Math.Round(risultato, 2);
 
             return risultato;
         }
