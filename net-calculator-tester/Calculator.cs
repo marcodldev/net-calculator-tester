@@ -25,9 +25,11 @@ namespace net_calculator_tester
         public static float Divisione(float num1, float num2)
         {
             float risultato = num1 / num2;
+            risultato = (float)Math.Round(risultato, 2);
 
             return risultato;
         }
+
 
         public static float Moltiplicazione(float num1, float num2)
         {
