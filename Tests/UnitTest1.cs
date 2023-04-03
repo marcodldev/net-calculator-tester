@@ -20,7 +20,7 @@ namespace Tests
            
         }
 
-        [Test]
+        [Test(Description = "Addizione tra i due numeri costanti espressi sopra")]
         public void TestAddizione()
         {
             
@@ -30,7 +30,7 @@ namespace Tests
             Assert.That(operazione, Is.EqualTo(risultato));
         }
 
-        [Test]
+        [Test(Description = "Sottrazione tra i due numeri costanti espressi sopra")]
         public void TestSottrazione()
         {
 
@@ -40,7 +40,7 @@ namespace Tests
             Assert.That(operazione, Is.EqualTo(risultato));
         }
         
-        [Test]
+        [Test(Description = "Divisione (arrotondata) tra i due numeri costanti espressi sopra")]
         public void TestDivisione()
         {
 
@@ -50,7 +50,7 @@ namespace Tests
             Assert.That(operazione, Is.EqualTo(risultato));
         }
 
-        [Test]
+        [Test(Description = "Moltiplicazione tra i due numeri costanti espressi sopra")]
         public void TestMoltiplicazione()
         {
 
